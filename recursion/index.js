@@ -39,7 +39,7 @@ function sumRecursive(a, b){
   return 1 + sumRecursive(a, b-1);
 }
 
-console.log(sumRecursive(2, 3));
+// console.log(sumRecursive(2, 3));
 
 // 2 + 3 -> 5
 
@@ -67,7 +67,7 @@ function prodRecursiveB(a, b){
   return sumRecursive(a, prodRecursive(a, b-1));
 }
 
-console.log(prodRecursiveB(2,3));
+// console.log(prodRecursiveB(2,3));
 // 2 * 3 -> 6 
 // 2 + 2 + 2 -> 6
 
@@ -91,19 +91,53 @@ function powerRecursiveB(a, b){
   return prodRecursive(a, powerRecursiveB(a, b-1));
 }
 
-console.log(powerRecursiveB(2,1));
-// 2^3
-// 2 * 2 * 2
+// console.log(powerRecursiveB(2,1));
 
-// 2^2
-// 2 * 2
+// 0, 1, 1, 2, 3, 5, 8, 13, 21
+// 0  1  2  3  4  5  6   7   8
+function fibIterative(n){
+  let fib = [0, 1]; //Caso base
 
-// 2^4
-// 2 * 2 * 2 * 2
+  for(let i = 0; i <= n - 2; i++){
+    fib.push(fib[i] + fib[i+1]);
+  }
 
-// powerRecursive(2, 0) -> 1
-// powerRecursive(2, 1) -> a * powerRecursive(2, 0) = 2
-// powerRecursive(2, 2) -> a * powerRecursive(2, 1) = 4
-// powerRecursive(2, 3) -> a * powerRecursive(2, 2) = 8
+  return fib; //O(n)
+}
 
-// powerRecursiveB(2, 1) -> prodRecursive(a, powerRecursive(2, 0))
+function fibRecursive(n){
+  if(n === 0){
+    return 0;
+  }
+
+  if(n === 1){
+    return 1;
+  }
+
+  return fibRecursive(n-2) + fibRecursive(n-1);
+}
+
+// console.log(fibRecursive(5));
+
+//Programación dinamica (memoization) 
+function fibRecursiveB(n, memo){
+  if(n === 0){
+    return 0;
+  }
+
+  if(n === 1){
+    return 1;
+  }
+
+  if(memo[n] === 0){
+    memo[n] = fibRecursiveB(n-2, memo) + fibRecursiveB(n-1, memo);
+  }
+
+  return memo[n];
+}
+
+function fibDynamic(n){
+  return fibRecursiveB(n, new Array(n+1).fill(0));
+}
+
+console.log(fibDynamic(8));
