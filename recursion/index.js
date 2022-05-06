@@ -105,6 +105,8 @@ function fibIterative(n){
   return fib; //O(n)
 }
 
+//O(2^n) -> Complejidad de tiempo
+//O(1) -> Espacio
 function fibRecursive(n){
   if(n === 0){
     return 0;
@@ -117,9 +119,11 @@ function fibRecursive(n){
   return fibRecursive(n-2) + fibRecursive(n-1);
 }
 
-// console.log(fibRecursive(5));
+// console.log(fibRecursive(47));
 
-//Programación dinamica (memoization) 
+//Programación dinamica (memoization) -> O(n)
+//O(n) -> tiempo
+//O(n) -> espacio
 function fibRecursiveB(n, memo){
   if(n === 0){
     return 0;
@@ -134,10 +138,33 @@ function fibRecursiveB(n, memo){
   }
 
   return memo[n];
-}
+} //O(n)
 
 function fibDynamic(n){
   return fibRecursiveB(n, new Array(n+1).fill(0));
 }
 
-console.log(fibDynamic(8));
+// console.log(fibDynamic(47));
+
+
+function tripleStep(n, memo){
+  if(n === 0){
+    return 1;
+  }
+
+  if(n < 0){
+    return 0;
+  }
+
+  if(memo[n] === 0){
+    memo[n] = tripleStep(n-1, memo) + tripleStep(n-2, memo) + tripleStep(n-3, memo)
+  }
+
+  return memo[n];
+}
+
+function tripleStepDP(n){
+  return tripleStep(n, new Array(n+1).fill(0));
+}
+
+console.log(tripleStepDP(50));
