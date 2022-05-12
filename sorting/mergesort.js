@@ -9,7 +9,8 @@ function mergeSort(arr) {
   const middle = Math.floor(length / 2);
   const leftSide = arr.slice(0, middle);
   const rightSide = arr.slice(middle);
-  return merge(mergeSort(leftSide), mergeSort(rightSide));
+  //Dividimos la lista hasta tener sublistas con un elemento
+  return merge(mergeSort(leftSide), mergeSort(rightSide)); 
 }
 
 function merge(left, right) {
