@@ -12,7 +12,7 @@ function insertionSort(arr) {
         //Comenzaremos a posicionar el numero más pequeño (arr[i]) a la izquierda
         //hasta encontrar su posición
         for(let j = i; j > 0; j--){
-          if(arr[j-1] <= arr[i] && arr[i] > arr[j-1]){
+          if(arr[j-1] <= arr[i]){
             //Eliminar el elemento que ocupa la posición i
             //Después lo insertaremos en la posición j donde i > j
             arr.splice(j,0,arr.splice(i,1)[0]);
@@ -25,5 +25,5 @@ function insertionSort(arr) {
   return arr;
 }
 
-let nArr = [5, 7, 9, 13, 3, 2, 12];
+let nArr = [3, 19, 7, 17, 1, 20, 9, 14, 4];
 console.log(insertionSort(nArr));
